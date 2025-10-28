@@ -15,3 +15,8 @@ declare module "@react-three/fiber" {
 declare module "@react-three/drei" {
   export * from "@react-three/drei/dist/declarations/src";
 }
+
+declare module "*.png" {
+  const content: string;
+  export default content;
+}

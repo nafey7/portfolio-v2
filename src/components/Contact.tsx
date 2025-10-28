@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { FloatingWhatsApp } from "react-floating-whatsapp";
+import emailjs from "@emailjs/browser";
+import ProfileImage from "../assets/icons/profile.png";
 import {
   Send,
   Mail,
@@ -12,65 +14,31 @@ import {
 } from "lucide-react";
 
 const Contact: React.FC = () => {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    message: "",
-  });
+  const form = useRef<HTMLFormElement>(null);
+  const [status, setStatus] = useState<
+    "idle" | "sending" | "success" | "error"
+  >("idle");
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const sendEmail = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
+    setStatus("sending");
 
-    try {
-      // Create FormData for FormSubmit.co
-      const formDataToSend = new FormData();
-      formDataToSend.append("firstName", formData.firstName);
-      formDataToSend.append("lastName", formData.lastName);
-      formDataToSend.append("email", formData.email);
-      formDataToSend.append("message", formData.message);
-      formDataToSend.append("_subject", "New Contact Form Submission");
-      formDataToSend.append("_captcha", "false");
+    if (!form.current) return;
 
-      const response = await fetch(
-        "https://formsubmit.co/ajax/nafeymoiz@gmail.com",
-        {
-          method: "POST",
-          body: formDataToSend,
-        }
-      );
-
-      if (response.ok) {
-        const result = await response.json();
-        if (result.success) {
-          setFormData({ firstName: "", lastName: "", email: "", message: "" });
-          alert("Message sent successfully! I'll get back to you soon.");
-        } else {
-          throw new Error("Form submission failed");
-        }
-      } else {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      alert(
-        "Sorry, there was an error sending your message. Please try again or contact me directly at nafeymoiz@gmail.com"
-      );
-    } finally {
-      setIsSubmitting(false);
-    }
+    emailjs
+      .sendForm(
+        "service_iz95hla", // Service ID
+        "template_odt096h", // Template ID
+        form.current,
+        "vTzNzWSr5c01BZMCJ" // Public Key
+      )
+      .then(() => {
+        setStatus("success");
+        form.current?.reset();
+      })
+      .catch(() => {
+        setStatus("error");
+      });
   };
 
   const contactInfo = [
@@ -120,6 +88,7 @@ const Contact: React.FC = () => {
       <FloatingWhatsApp
         phoneNumber="+923026402646"
         accountName="Moiz"
+        avatar={ProfileImage}
         chatMessage="Hello there! How can I help?"
         darkMode={true}
         style={{ display: "block" }}
@@ -207,75 +176,52 @@ const Contact: React.FC = () => {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 1, ease: "easeOut" }}
             >
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.1 }}
-                  >
-                    <label
-                      htmlFor="firstName"
-                      className="block text-sm font-medium mb-2"
-                    >
-                      First Name *
-                    </label>
-                    <input
-                      type="text"
-                      id="firstName"
-                      name="firstName"
-                      value={formData.firstName}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-3 bg-white text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
-                      placeholder="Your first name"
-                    />
-                  </motion.div>
-
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.2 }}
-                  >
-                    <label
-                      htmlFor="lastName"
-                      className="block text-sm font-medium mb-2"
-                    >
-                      Last Name *
-                    </label>
-                    <input
-                      type="text"
-                      id="lastName"
-                      name="lastName"
-                      value={formData.lastName}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-3 bg-white text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
-                      placeholder="Your last name"
-                    />
-                  </motion.div>
-                </div>
+              <form ref={form} onSubmit={sendEmail} className="space-y-6">
+                {/* Hidden field for recipient email */}
+                <input
+                  type="hidden"
+                  name="to_email"
+                  value="nafeymoiz@gmail.com"
+                />
 
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: 0.3 }}
+                  transition={{ delay: 0.1 }}
                 >
                   <label
-                    htmlFor="email"
+                    htmlFor="user_name"
+                    className="block text-sm font-medium mb-2"
+                  >
+                    Name *
+                  </label>
+                  <input
+                    type="text"
+                    id="user_name"
+                    name="user_name"
+                    required
+                    className="w-full px-4 py-3 bg-white text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+                    placeholder="Your name"
+                  />
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 }}
+                >
+                  <label
+                    htmlFor="user_email"
                     className="block text-sm font-medium mb-2"
                   >
                     Email Address *
                   </label>
                   <input
                     type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
+                    id="user_email"
+                    name="user_email"
                     required
                     className="w-full px-4 py-3 bg-white text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
                     placeholder="your@email.com"
@@ -286,7 +232,7 @@ const Contact: React.FC = () => {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: 0.4 }}
+                  transition={{ delay: 0.3 }}
                 >
                   <label
                     htmlFor="message"
@@ -297,8 +243,6 @@ const Contact: React.FC = () => {
                   <textarea
                     id="message"
                     name="message"
-                    value={formData.message}
-                    onChange={handleChange}
                     required
                     rows={6}
                     className="w-full px-4 py-3 bg-white text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 resize-none"
@@ -308,7 +252,7 @@ const Contact: React.FC = () => {
 
                 <motion.button
                   type="submit"
-                  disabled={isSubmitting}
+                  disabled={status === "sending"}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed bg-gradient-to-r from-blue-500 to-purple-600 hover:shadow-lg hover:shadow-blue-500/25"
@@ -316,7 +260,7 @@ const Contact: React.FC = () => {
                     color: "white",
                   }}
                 >
-                  {isSubmitting ? (
+                  {status === "sending" ? (
                     <>
                       <motion.div
                         animate={{ rotate: 360 }}
@@ -336,6 +280,31 @@ const Contact: React.FC = () => {
                     </>
                   )}
                 </motion.button>
+
+                {status === "success" && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="text-center p-4 bg-green-500/20 border border-green-500/30 rounded-lg"
+                  >
+                    <p className="text-green-400 font-medium">
+                      Message sent successfully! I'll get back to you soon.
+                    </p>
+                  </motion.div>
+                )}
+
+                {status === "error" && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="text-center p-4 bg-red-500/20 border border-red-500/30 rounded-lg"
+                  >
+                    <p className="text-red-400 font-medium">
+                      Failed to send message. Please try again or contact me
+                      directly at nafeymoiz@gmail.com
+                    </p>
+                  </motion.div>
+                )}
               </form>
             </motion.div>
           </div>
