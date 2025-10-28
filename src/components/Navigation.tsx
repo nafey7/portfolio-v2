@@ -47,7 +47,7 @@ const Navigation: React.FC = () => {
             className="text-2xl font-bold gradient-text cursor-pointer"
             onClick={() => scrollToSection("#about")}
           >
-            Portfolio
+            Moiz Nafey
           </motion.div>
 
           {/* Desktop Navigation */}
