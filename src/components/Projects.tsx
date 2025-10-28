@@ -3,6 +3,13 @@ import { motion } from "framer-motion";
 import { ExternalLink, Github } from "lucide-react";
 
 const Projects: React.FC = () => {
+  const scrollToContact = () => {
+    const element = document.querySelector("#contact");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   const projects = [
     {
       title: "The Leading Practice",
@@ -103,16 +110,15 @@ const Projects: React.FC = () => {
 
                   {/* Overlay */}
                   <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
-                    <motion.a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    <motion.button
+                      onClick={scrollToContact}
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.95 }}
                       className="p-3 glass-effect rounded-lg hover:bg-white/20 transition-colors duration-300"
+                      title="Contact me for GitHub access"
                     >
                       <Github size={20} />
-                    </motion.a>
+                    </motion.button>
                     <motion.a
                       href={project.live}
                       target={project.inDev ? "_self" : "_blank"}
