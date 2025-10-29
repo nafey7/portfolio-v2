@@ -27,24 +27,51 @@ const Projects: React.FC = () => {
   } | null>(null);
   const swiperRef = useRef<any>(null);
   const [swiperReady, setSwiperReady] = useState(false);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
+  const imagesLoadedCountRef = useRef(0);
 
-  // Reset Swiper readiness when modal or project changes
+  // Reset states when modal or project changes
   useEffect(() => {
-    if (isModalOpen) {
+    if (isModalOpen && selectedProject) {
       setSwiperReady(false);
+      setImagesLoaded(false);
+      imagesLoadedCountRef.current = 0;
     }
   }, [isModalOpen, selectedProject?.title]);
 
-  // Reset Swiper to first slide when modal opens or project changes
-  useEffect(() => {
-    if (isModalOpen && swiperRef.current && swiperReady) {
-      // Additional safety: ensure we're on slide 0 if swiper is already ready
-      if (swiperRef.current.activeIndex !== 0) {
-        swiperRef.current.slideTo(0, 0);
-        swiperRef.current.update();
-      }
+  // Handle image loading
+  const handleImageLoad = () => {
+    if (!selectedProject) return;
+    imagesLoadedCountRef.current += 1;
+    if (imagesLoadedCountRef.current >= selectedProject.images.length) {
+      setImagesLoaded(true);
     }
-  }, [isModalOpen, selectedProject?.title, swiperReady]);
+  };
+
+  // Initialize Swiper when images are loaded and Swiper is ready
+  useEffect(() => {
+    if (isModalOpen && swiperRef.current && imagesLoaded) {
+      // Ensure Swiper is reset to slide 0 after images load
+      const resetToFirstSlide = () => {
+        if (swiperRef.current) {
+          swiperRef.current.slideTo(0, 0);
+          swiperRef.current.update();
+          swiperRef.current.updateSlides();
+        }
+      };
+
+      // Use requestAnimationFrame to ensure DOM is ready
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          resetToFirstSlide();
+          setTimeout(() => {
+            resetToFirstSlide();
+            setSwiperReady(true);
+          }, 100);
+        });
+      });
+    }
+  }, [isModalOpen, selectedProject?.title, imagesLoaded]);
 
   const scrollToContact = () => {
     const element = document.querySelector("#contact");
@@ -346,7 +373,7 @@ const Projects: React.FC = () => {
             <div className="p-6">
               <div
                 style={{
-                  opacity: swiperReady ? 1 : 0,
+                  opacity: swiperReady && imagesLoaded ? 1 : 0,
                   transition: "opacity 0.2s",
                 }}
               >
@@ -356,32 +383,8 @@ const Projects: React.FC = () => {
                     swiperRef.current = swiper;
                   }}
                   onInit={(swiper) => {
-                    // Immediately reset to slide 0
-                    swiper.slideTo(0, 0);
-                    // Use double requestAnimationFrame to ensure all rendering is complete
-                    requestAnimationFrame(() => {
-                      requestAnimationFrame(() => {
-                        // Force reset again after rendering
-                        swiper.slideTo(0, 0);
-                        swiper.update();
-                        swiper.updateSlides();
-                        // Small delay to ensure coverflow effect has applied
-                        setTimeout(() => {
-                          // Final verification and make visible
-                          if (swiper.activeIndex !== 0) {
-                            swiper.slideTo(0, 0);
-                            swiper.update();
-                          }
-                          setSwiperReady(true);
-                        }, 50);
-                      });
-                    });
-                  }}
-                  onSlideChange={(swiper) => {
-                    // If somehow we're not on slide 0 when ready, fix it
-                    if (!swiperReady && swiper.activeIndex !== 0) {
-                      swiper.slideTo(0, 0);
-                    }
+                    // Swiper is initialized - wait for images to load before showing
+                    // The useEffect will handle resetting to slide 0 after images load
                   }}
                   navigation={true}
                   effect="coverflow"
@@ -415,6 +418,8 @@ const Projects: React.FC = () => {
                             index + 1
                           }`}
                           className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+                          onLoad={handleImageLoad}
+                          onError={handleImageLoad}
                         />
                       </div>
                     </SwiperSlide>
