@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   ExternalLink,
@@ -25,6 +25,26 @@ const Projects: React.FC = () => {
     title: string;
     images: string[];
   } | null>(null);
+  const swiperRef = useRef<any>(null);
+  const [swiperReady, setSwiperReady] = useState(false);
+
+  // Reset Swiper readiness when modal or project changes
+  useEffect(() => {
+    if (isModalOpen) {
+      setSwiperReady(false);
+    }
+  }, [isModalOpen, selectedProject?.title]);
+
+  // Reset Swiper to first slide when modal opens or project changes
+  useEffect(() => {
+    if (isModalOpen && swiperRef.current && swiperReady) {
+      // Additional safety: ensure we're on slide 0 if swiper is already ready
+      if (swiperRef.current.activeIndex !== 0) {
+        swiperRef.current.slideTo(0, 0);
+        swiperRef.current.update();
+      }
+    }
+  }, [isModalOpen, selectedProject?.title, swiperReady]);
 
   const scrollToContact = () => {
     const element = document.querySelector("#contact");
@@ -324,41 +344,83 @@ const Projects: React.FC = () => {
 
             {/* Modal Body with Swiper */}
             <div className="p-6">
-              <Swiper
-                navigation={true}
-                effect="coverflow"
-                grabCursor={true}
-                centeredSlides={true}
-                slidesPerView="auto"
-                coverflowEffect={{
-                  rotate: 50,
-                  stretch: 0,
-                  depth: 100,
-                  modifier: 1,
-                  slideShadows: true,
-                }}
-                pagination={{
-                  clickable: true,
-                }}
-                modules={[EffectCoverflow, Pagination, Navigation]}
-                className="mySwiper"
+              <div
                 style={{
-                  width: "100%",
-                  height: "60vh",
+                  opacity: swiperReady ? 1 : 0,
+                  transition: "opacity 0.2s",
                 }}
               >
-                {selectedProject.images.map((image, index) => (
-                  <SwiperSlide key={index} style={{ width: "80%" }}>
-                    <div className="w-full h-full flex items-center justify-center">
-                      <img
-                        src={image}
-                        alt={`${selectedProject.title} screenshot ${index + 1}`}
-                        className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
-                      />
-                    </div>
-                  </SwiperSlide>
-                ))}
-              </Swiper>
+                <Swiper
+                  key={`${selectedProject.title}-${isModalOpen}`}
+                  onSwiper={(swiper) => {
+                    swiperRef.current = swiper;
+                  }}
+                  onInit={(swiper) => {
+                    // Immediately reset to slide 0
+                    swiper.slideTo(0, 0);
+                    // Use double requestAnimationFrame to ensure all rendering is complete
+                    requestAnimationFrame(() => {
+                      requestAnimationFrame(() => {
+                        // Force reset again after rendering
+                        swiper.slideTo(0, 0);
+                        swiper.update();
+                        swiper.updateSlides();
+                        // Small delay to ensure coverflow effect has applied
+                        setTimeout(() => {
+                          // Final verification and make visible
+                          if (swiper.activeIndex !== 0) {
+                            swiper.slideTo(0, 0);
+                            swiper.update();
+                          }
+                          setSwiperReady(true);
+                        }, 50);
+                      });
+                    });
+                  }}
+                  onSlideChange={(swiper) => {
+                    // If somehow we're not on slide 0 when ready, fix it
+                    if (!swiperReady && swiper.activeIndex !== 0) {
+                      swiper.slideTo(0, 0);
+                    }
+                  }}
+                  navigation={true}
+                  effect="coverflow"
+                  grabCursor={true}
+                  centeredSlides={true}
+                  slidesPerView="auto"
+                  initialSlide={0}
+                  coverflowEffect={{
+                    rotate: 50,
+                    stretch: 0,
+                    depth: 100,
+                    modifier: 1,
+                    slideShadows: true,
+                  }}
+                  pagination={{
+                    clickable: true,
+                  }}
+                  modules={[EffectCoverflow, Pagination, Navigation]}
+                  className="mySwiper"
+                  style={{
+                    width: "100%",
+                    height: "60vh",
+                  }}
+                >
+                  {selectedProject.images.map((image, index) => (
+                    <SwiperSlide key={index} style={{ width: "80%" }}>
+                      <div className="w-full h-full flex items-center justify-center">
+                        <img
+                          src={image}
+                          alt={`${selectedProject.title} screenshot ${
+                            index + 1
+                          }`}
+                          className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+                        />
+                      </div>
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              </div>
             </div>
           </div>
         </div>
