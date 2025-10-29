@@ -1,17 +1,46 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { ExternalLink, Github, ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  ExternalLink,
+  Github,
+  ChevronLeft,
+  ChevronRight,
+  X,
+} from "lucide-react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, EffectCoverflow } from "swiper/modules";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/effect-coverflow";
 
 const Projects: React.FC = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState<{
     [key: string]: number;
   }>({});
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedProject, setSelectedProject] = useState<{
+    title: string;
+    images: string[];
+  } | null>(null);
 
   const scrollToContact = () => {
     const element = document.querySelector("#contact");
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
+  };
+
+  const openModal = (project: { title: string; images: string[] }) => {
+    setSelectedProject(project);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedProject(null);
   };
 
   const nextImage = (projectTitle: string, totalImages: number) => {
@@ -136,7 +165,7 @@ const Projects: React.FC = () => {
             >
               <div className="glass-effect rounded-2xl overflow-hidden h-full">
                 {/* Project Image Carousel */}
-                <div className="relative h-48 overflow-hidden">
+                <div className="relative h-64 md:h-72 lg:h-80 overflow-hidden">
                   {/* Navigation Arrows - positioned above image with higher z-index */}
                   {project.images.length > 1 && (
                     <>
@@ -162,7 +191,15 @@ const Projects: React.FC = () => {
                   )}
 
                   {/* Image Container */}
-                  <div className="relative w-full h-full">
+                  <div
+                    className="relative w-full h-full cursor-pointer"
+                    onClick={() =>
+                      openModal({
+                        title: project.title,
+                        images: project.images,
+                      })
+                    }
+                  >
                     <img
                       key={`${project.title}-${
                         currentImageIndex[project.title] || 0
@@ -173,7 +210,7 @@ const Projects: React.FC = () => {
                       alt={`${project.title} screenshot ${
                         (currentImageIndex[project.title] || 0) + 1
                       }`}
-                      className="w-full h-full object-cover transition-opacity duration-300"
+                      className="w-full h-full object-cover transition-opacity duration-300 hover:opacity-90"
                       onError={(e) => {
                         // Fallback to gradient background if image fails to load
                         const target = e.target as HTMLImageElement;
@@ -260,6 +297,72 @@ const Projects: React.FC = () => {
           ))}
         </motion.div>
       </div>
+
+      {/* Modal */}
+      {isModalOpen && selectedProject && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          {/* Backdrop */}
+          <div
+            className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+            onClick={closeModal}
+          />
+
+          {/* Modal Content */}
+          <div className="relative z-10 w-full max-w-6xl mx-4 max-h-[90vh] bg-gray-900 rounded-2xl overflow-hidden">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between p-6 border-b border-gray-700">
+              <h3 className="text-2xl font-bold gradient-text">
+                {selectedProject.title}
+              </h3>
+              <button
+                onClick={closeModal}
+                className="p-2 hover:bg-gray-700 rounded-lg transition-colors duration-300"
+              >
+                <X size={24} />
+              </button>
+            </div>
+
+            {/* Modal Body with Swiper */}
+            <div className="p-6">
+              <Swiper
+                navigation={true}
+                effect="coverflow"
+                grabCursor={true}
+                centeredSlides={true}
+                slidesPerView="auto"
+                coverflowEffect={{
+                  rotate: 50,
+                  stretch: 0,
+                  depth: 100,
+                  modifier: 1,
+                  slideShadows: true,
+                }}
+                pagination={{
+                  clickable: true,
+                }}
+                modules={[EffectCoverflow, Pagination, Navigation]}
+                className="mySwiper"
+                style={{
+                  width: "100%",
+                  height: "60vh",
+                }}
+              >
+                {selectedProject.images.map((image, index) => (
+                  <SwiperSlide key={index} style={{ width: "80%" }}>
+                    <div className="w-full h-full flex items-center justify-center">
+                      <img
+                        src={image}
+                        alt={`${selectedProject.title} screenshot ${index + 1}`}
+                        className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+                      />
+                    </div>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
