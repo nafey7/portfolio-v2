@@ -25,6 +25,10 @@
     @apply backdrop-blur-md bg-white/10 border border-white/20 rounded-lg;
   }
 
+  .nav-glass-effect {
+    @apply backdrop-blur-md bg-white/10 border border-white/20 rounded-br-lg rounded-bl-lg;
+  }
+
   /* Swiper Custom Styles */
   .mySwiper {
     --swiper-navigation-color: #ffffff;

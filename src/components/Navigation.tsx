@@ -42,11 +42,11 @@ const Navigation: React.FC = () => {
       transition={{ duration: 0.8, ease: "easeOut" }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "glass-effect py-4"
-          : "bg-transparent py-6 md:bg-transparent md:py-6 max-md:glass-effect max-md:py-4"
+          ? "nav-glass-effect py-4"
+          : "bg-transparent py-6 md:bg-transparent md:py-6 max-md:nav-glass-effect max-md:py-4"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 pt-2">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <motion.div
@@ -78,7 +78,7 @@ const Navigation: React.FC = () => {
           {/* Mobile Menu Button */}
           <motion.button
             whileTap={{ scale: 0.95 }}
-            className="md:hidden text-white"
+            className="md:hidden text-white p-2"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
