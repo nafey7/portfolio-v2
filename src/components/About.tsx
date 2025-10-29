@@ -3,8 +3,18 @@ import { motion } from "framer-motion";
 import { Download, Github, Linkedin, Mail } from "lucide-react";
 import Lottie from "lottie-react";
 import responsiveDeveloper from "../assets/animations/responsiveDeveloperTwo.json";
+import cvFile from "../assets/files/Moiz_Nafey_Resume.pdf";
 
 const About: React.FC = () => {
+  const handleDownloadCV = () => {
+    const link = document.createElement("a");
+    link.href = cvFile;
+    link.download = "Moiz_Nafey_Resume.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -82,6 +92,7 @@ const About: React.FC = () => {
 
             <div className="flex flex-col sm:flex-row gap-4">
               <motion.button
+                onClick={handleDownloadCV}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg font-medium hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300"
