@@ -10,7 +10,7 @@ import BackgroundScene from "./components/BackgroundScene.tsx";
 
 function App() {
   return (
-    <div className="relative">
+    <div className="relative w-full max-w-full overflow-x-hidden">
       {/* Background 3D Scene */}
       <div className="fixed inset-0 z-0">
         <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
@@ -19,9 +19,9 @@ function App() {
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10">
+      <div className="relative z-10 w-full max-w-full">
         <Navigation />
-        <main>
+        <main className="w-full max-w-full">
           <About />
           <Projects />
           <Skills />

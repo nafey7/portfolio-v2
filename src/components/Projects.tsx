@@ -308,7 +308,7 @@ const Projects: React.FC = () => {
           />
 
           {/* Modal Content */}
-          <div className="relative z-10 w-full max-w-6xl mx-6 sm:mx-4 max-h-[90vh] bg-gray-900 rounded-2xl overflow-hidden">
+          <div className="relative z-10 w-full max-w-6xl mx-4 sm:mx-6 max-h-[90vh] bg-gray-900 rounded-2xl overflow-hidden">
             {/* Modal Header */}
             <div className="flex items-center justify-between p-6 border-b border-gray-700">
               <h3 className="text-2xl font-bold gradient-text">

@@ -49,7 +49,7 @@ const About: React.FC = () => {
   ];
 
   return (
-    <section id="about" className="section-container">
+    <section id="about" className="section-container-mobile-padding">
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
         {/* Left Column - Text Content */}
         <motion.div

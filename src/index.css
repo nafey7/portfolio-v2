@@ -10,11 +10,26 @@
   body {
     @apply bg-gray-900 text-white overflow-x-hidden;
   }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
 }
 
 @layer components {
   .section-container {
-    @apply min-h-screen flex items-center justify-center px-6 sm:px-8 md:px-4 py-20;
+    @apply min-h-screen flex items-center justify-center px-4 sm:px-6 md:px-8 py-20;
+  }
+
+  .section-container-mobile-padding {
+    @apply min-h-screen flex items-center justify-center px-4 sm:px-6 md:px-8 pt-32 pb-20 sm:pt-24 md:pt-20;
   }
 
   .gradient-text {
@@ -61,5 +76,22 @@
   .mySwiper .swiper-pagination-bullet-active {
     opacity: 1;
     background: #3b82f6;
+  }
+
+  /* Ensure Swiper doesn't cause horizontal overflow */
+  .mySwiper {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: hidden;
+  }
+
+  .mySwiper .swiper-wrapper {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .mySwiper .swiper-slide {
+    width: auto !important;
+    max-width: 100% !important;
   }
 }
