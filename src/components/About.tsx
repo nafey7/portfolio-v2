@@ -106,6 +106,10 @@ const About: React.FC = () => {
                   <motion.a
                     key={label}
                     href={href}
+                    target={href.startsWith("mailto:") ? "_self" : "_blank"}
+                    rel={
+                      href.startsWith("mailto:") ? "" : "noopener noreferrer"
+                    }
                     whileHover={{ scale: 1.1, rotate: 5 }}
                     whileTap={{ scale: 0.95 }}
                     className="p-3 glass-effect rounded-lg hover:bg-white/20 transition-colors duration-300"
