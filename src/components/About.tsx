@@ -169,7 +169,7 @@ const About: React.FC = () => {
                 <AboutGLB />
               </Suspense>
               <OrbitControls
-                enableZoom={true}
+                enableZoom={false}
                 enablePan={false}
                 minDistance={6}
                 maxDistance={14}
