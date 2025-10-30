@@ -8,14 +8,15 @@ import { Canvas } from "@react-three/fiber";
 // @ts-ignore - drei exports may not be fully typed
 import { useGLTF, OrbitControls } from "@react-three/drei";
 
-// Add AboutGLB component to load /assets/icons/about.glb
+// Add AboutGLB component to load /about.glb (served from /public)
 function AboutGLB() {
-  // Use the relative path from public, so `/about.glb` if you move the file to public, or use import.meta.url if handled via Vite.
-  // To keep consistent with vite/react conventions, and avoid asset loading issues, place about.glb in /public directory.
-  // For now, assume public path:
   const { scene } = useGLTF("/about.glb");
-  return <primitive object={scene} scale={[1.0, 1.0, 1.0]} />;
+  return (
+    <primitive object={scene} scale={[1.0, 1.0, 1.0]} position={[0, -0.4, 0]} />
+  );
 }
+// Preload the model to avoid flashes/missing renders
+useGLTF.preload("/about.glb");
 
 const About: React.FC = () => {
   const handleDownloadCV = () => {
@@ -153,14 +154,26 @@ const About: React.FC = () => {
           </div>
           */}
           <div className="w-full h-[350px] sm:h-[400px] md:h-[480px] lg:h-[500px] xl:h-[550px] max-w-md mx-auto">
-            <Canvas camera={{ position: [0, 0, 6], fov: 55 }}>
+            <Canvas dpr={[1, 2]} camera={{ position: [0, 0, 9], fov: 45 }}>
               <ambientLight intensity={0.6} />
               <pointLight position={[8, 10, 10]} intensity={0.8} />
               <directionalLight position={[-5, 7, 7]} intensity={1} />
-              <Suspense fallback={null}>
+              <Suspense
+                fallback={
+                  <mesh>
+                    <boxGeometry args={[2, 2, 2]} />
+                    <meshStandardMaterial color="#3B82F6" wireframe />
+                  </mesh>
+                }
+              >
                 <AboutGLB />
               </Suspense>
-              <OrbitControls enableZoom={false} enablePan={false} />
+              <OrbitControls
+                enableZoom={true}
+                enablePan={false}
+                minDistance={6}
+                maxDistance={14}
+              />
             </Canvas>
           </div>
         </motion.div>
