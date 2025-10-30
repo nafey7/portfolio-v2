@@ -53,15 +53,14 @@ const Navigation: React.FC = () => {
           {/* Logo */}
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="flex items-center cursor-pointer" // Changed for better alignment
+            className="flex items-center cursor-pointer w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 shrink-0"
             onClick={() => scrollToSection("#about")}
-            style={{ width: 70, height: 70 }} // Responsive logo size
           >
             <Lottie
               animationData={logoAnimation}
               loop={true}
               autoplay
-              style={{ width: 70, height: 70 }} // Square size for logo
+              className="w-full h-full"
               aria-label="Logo"
             />
           </motion.div>

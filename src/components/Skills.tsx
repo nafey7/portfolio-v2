@@ -99,10 +99,10 @@ const Skills: React.FC = () => {
           viewport={{ once: true, amount: 0.3 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl lg:text-6xl font-bold mb-6">
+          <h2 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
             Technical <span className="gradient-text">Skills</span>
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-sm xs:text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
             A comprehensive overview of my technical expertise and proficiency
             across various technologies and frameworks.
           </p>
@@ -114,7 +114,7 @@ const Skills: React.FC = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
-          className="grid md:grid-cols-2 gap-8"
+          className="grid md:grid-cols-2 gap-4 xs:gap-6 sm:gap-8"
         >
           {skillCategories.map((category, categoryIndex) => (
             <motion.div
@@ -122,7 +122,7 @@ const Skills: React.FC = () => {
               variants={itemVariants}
               className="space-y-4"
             >
-              <h3 className="text-2xl font-bold gradient-text">
+              <h3 className="text-lg xs:text-xl sm:text-2xl font-bold gradient-text">
                 {category.title}
               </h3>
               <div className="space-y-3">

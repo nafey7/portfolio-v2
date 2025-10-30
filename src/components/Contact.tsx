@@ -105,16 +105,16 @@ const Contact: React.FC = () => {
             viewport={{ once: true, amount: 0.3 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl lg:text-6xl font-bold mb-6">
+            <h2 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
               Get In <span className="gradient-text">Touch</span>
             </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            <p className="text-sm xs:text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
               Ready to collaborate on your next project? Let's discuss how we
               can bring your ideas to life with innovative solutions.
             </p>
           </motion.div>
 
-          <div className="grid lg:grid-cols-2 gap-12">
+          <div className="grid lg:grid-cols-2 gap-6 xs:gap-8 sm:gap-12">
             {/* Contact Information */}
             <motion.div
               variants={containerVariants}
@@ -124,7 +124,7 @@ const Contact: React.FC = () => {
               className="space-y-8"
             >
               <motion.div variants={itemVariants} className="space-y-6">
-                <h3 className="text-3xl font-bold gradient-text">
+                <h3 className="text-xl xs:text-2xl sm:text-3xl font-bold gradient-text">
                   Let's Connect
                 </h3>
                 <p className="text-gray-300 leading-relaxed">
@@ -151,7 +151,9 @@ const Contact: React.FC = () => {
               </motion.div>
 
               <motion.div variants={itemVariants} className="space-y-4">
-                <h4 className="text-xl font-semibold">Follow Me</h4>
+                <h4 className="text-base xs:text-lg sm:text-xl font-semibold">
+                  Follow Me
+                </h4>
                 <div className="flex gap-4">
                   {socialLinks.map(({ icon: Icon, href, label }) => (
                     <motion.a
@@ -178,7 +180,11 @@ const Contact: React.FC = () => {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 1, ease: "easeOut" }}
             >
-              <form ref={form} onSubmit={sendEmail} className="space-y-6">
+              <form
+                ref={form}
+                onSubmit={sendEmail}
+                className="space-y-4 xs:space-y-5 sm:space-y-6"
+              >
                 {/* Hidden field for recipient email */}
                 <input
                   type="hidden"
@@ -203,7 +209,7 @@ const Contact: React.FC = () => {
                     id="user_name"
                     name="user_name"
                     required
-                    className="w-full px-4 py-3 bg-white text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+                    className="w-full px-3 py-2 xs:px-4 xs:py-3 bg-white text-black text-sm xs:text-base rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
                     placeholder="Your name"
                   />
                 </motion.div>
@@ -225,7 +231,7 @@ const Contact: React.FC = () => {
                     id="user_email"
                     name="user_email"
                     required
-                    className="w-full px-4 py-3 bg-white text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+                    className="w-full px-3 py-2 xs:px-4 xs:py-3 bg-white text-black text-sm xs:text-base rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
                     placeholder="your@email.com"
                   />
                 </motion.div>
@@ -247,7 +253,7 @@ const Contact: React.FC = () => {
                     name="message"
                     required
                     rows={6}
-                    className="w-full px-4 py-3 bg-white text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 resize-none"
+                    className="w-full px-3 py-2 xs:px-4 xs:py-3 bg-white text-black text-sm xs:text-base rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 resize-none"
                     placeholder="Tell me about your project..."
                   />
                 </motion.div>
@@ -257,7 +263,7 @@ const Contact: React.FC = () => {
                   disabled={status === "sending"}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed bg-gradient-to-r from-blue-500 to-purple-600 hover:shadow-lg hover:shadow-blue-500/25"
+                  className="w-full flex items-center justify-center gap-2 px-4 py-2.5 xs:px-6 xs:py-3 rounded-lg font-medium text-sm xs:text-base transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed bg-gradient-to-r from-blue-500 to-purple-600 hover:shadow-lg hover:shadow-blue-500/25"
                   style={{
                     color: "white",
                   }}

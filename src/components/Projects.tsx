@@ -188,10 +188,10 @@ const Projects: React.FC = () => {
           viewport={{ once: true, amount: 0.3 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl lg:text-6xl font-bold mb-6">
+          <h2 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
             Featured <span className="gradient-text">Products</span>
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-sm xs:text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
             A collection of my recent work showcasing modern web development
             techniques and innovative solutions.
           </p>
@@ -202,7 +202,7 @@ const Projects: React.FC = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
-          className="grid md:grid-cols-2 gap-8"
+          className="grid md:grid-cols-2 gap-4 xs:gap-6 sm:gap-8"
         >
           {projects.map((project, index) => (
             <motion.div
@@ -283,10 +283,10 @@ const Projects: React.FC = () => {
                 </div>
 
                 {/* Project Content */}
-                <div className="p-6 space-y-4">
+                <div className="p-4 xs:p-5 sm:p-6 space-y-3 xs:space-y-4">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <h3 className="text-2xl font-bold group-hover:gradient-text transition-all duration-300">
+                      <h3 className="text-lg xs:text-xl sm:text-2xl font-bold group-hover:gradient-text transition-all duration-300">
                         {project.title}
                       </h3>
                       {project.inDev && (
@@ -328,11 +328,11 @@ const Projects: React.FC = () => {
                   </p>
 
                   {/* Tech Stack */}
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-1.5 xs:gap-2">
                     {project.tech.map((tech) => (
                       <span
                         key={tech}
-                        className="px-3 py-1 bg-white/10 rounded-full text-sm font-medium"
+                        className="px-2 py-0.5 xs:px-3 xs:py-1 bg-white/10 rounded-full text-xs xs:text-sm font-medium"
                       >
                         {tech}
                       </span>
@@ -357,8 +357,8 @@ const Projects: React.FC = () => {
           {/* Modal Content */}
           <div className="relative z-10 w-full max-w-6xl mx-4 sm:mx-6 max-h-[90vh] bg-gray-900 rounded-2xl overflow-hidden">
             {/* Modal Header */}
-            <div className="flex items-center justify-between p-6 border-b border-gray-700">
-              <h3 className="text-2xl font-bold gradient-text">
+            <div className="flex items-center justify-between p-4 xs:p-5 sm:p-6 border-b border-gray-700">
+              <h3 className="text-lg xs:text-xl sm:text-2xl font-bold gradient-text">
                 {selectedProject.title}
               </h3>
               <button
@@ -370,7 +370,7 @@ const Projects: React.FC = () => {
             </div>
 
             {/* Modal Body with Swiper */}
-            <div className="p-6">
+            <div className="p-4 xs:p-5 sm:p-6">
               <div
                 style={{
                   opacity: swiperReady && imagesLoaded ? 1 : 0,

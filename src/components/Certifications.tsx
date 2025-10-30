@@ -54,10 +54,10 @@ const Certifications: React.FC = () => {
           viewport={{ once: true, amount: 0.3 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl lg:text-6xl font-bold mb-6">
+          <h2 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
             Professional <span className="gradient-text">Certifications</span>
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-sm xs:text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
             Validating my expertise through recognized industry certifications
             and academic achievements.
           </p>
@@ -68,7 +68,7 @@ const Certifications: React.FC = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
-          className="grid md:grid-cols-2 gap-8"
+          className="grid md:grid-cols-2 gap-4 xs:gap-6 sm:gap-8"
         >
           {certifications.map((cert) => (
             <motion.div
@@ -106,7 +106,7 @@ const Certifications: React.FC = () => {
 
                 {/* Certification Content */}
                 <div className="p-6 space-y-4">
-                  <h3 className="text-2xl font-bold group-hover:gradient-text transition-all duration-300">
+                  <h3 className="text-lg xs:text-xl sm:text-2xl font-bold group-hover:gradient-text transition-all duration-300">
                     {cert.title}
                   </h3>
 

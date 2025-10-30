@@ -75,13 +75,6 @@ const BackgroundScene: React.FC = () => {
       <pointLight position={[10, 10, 10]} intensity={0.5} color="#3B82F6" />
       <pointLight position={[-10, -10, -10]} intensity={0.3} color="#8B5CF6" />
 
-      {/* Floating Spheres */}
-      <FloatingSphere position={[-3, 2, -5]} color="#3B82F6" speed={0.5} />
-      <FloatingSphere position={[3, -1, -8]} color="#8B5CF6" speed={0.8} />
-      <FloatingSphere position={[0, 3, -6]} color="#EC4899" speed={0.3} />
-      <FloatingSphere position={[-2, -2, -10]} color="#10B981" speed={0.6} />
-      <FloatingSphere position={[4, 1, -7]} color="#F59E0B" speed={0.4} />
-
       {/* Particle Field */}
       <ParticleField />
     </>
