@@ -1,9 +1,21 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { motion } from "framer-motion";
 import { Download, Github, Linkedin, Mail } from "lucide-react";
 import Lottie from "lottie-react";
 import responsiveDeveloper from "../assets/animations/responsiveDeveloperTwo.json";
 import cvFile from "../assets/files/Moiz_Nafey_Resume.pdf";
+import { Canvas } from "@react-three/fiber";
+// @ts-ignore - drei exports may not be fully typed
+import { useGLTF, OrbitControls } from "@react-three/drei";
+
+// Add AboutGLB component to load /assets/icons/about.glb
+function AboutGLB() {
+  // Use the relative path from public, so `/about.glb` if you move the file to public, or use import.meta.url if handled via Vite.
+  // To keep consistent with vite/react conventions, and avoid asset loading issues, place about.glb in /public directory.
+  // For now, assume public path:
+  const { scene } = useGLTF("/about.glb");
+  return <primitive object={scene} scale={[1.0, 1.0, 1.0]} />;
+}
 
 const About: React.FC = () => {
   const handleDownloadCV = () => {
@@ -131,12 +143,25 @@ const About: React.FC = () => {
           transition={{ duration: 1, ease: "easeOut" }}
           className="relative flex items-center justify-center"
         >
+          {/*
           <div className="max-w-md mx-auto">
             <Lottie
               animationData={responsiveDeveloper}
               loop={true}
               className="w-full h-full"
             />
+          </div>
+          */}
+          <div className="w-full h-[350px] sm:h-[400px] md:h-[480px] lg:h-[500px] xl:h-[550px] max-w-md mx-auto">
+            <Canvas camera={{ position: [0, 0, 6], fov: 55 }}>
+              <ambientLight intensity={0.6} />
+              <pointLight position={[8, 10, 10]} intensity={0.8} />
+              <directionalLight position={[-5, 7, 7]} intensity={1} />
+              <Suspense fallback={null}>
+                <AboutGLB />
+              </Suspense>
+              <OrbitControls enableZoom={false} enablePan={false} />
+            </Canvas>
           </div>
         </motion.div>
       </div>

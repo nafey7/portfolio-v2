@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import Lottie from "lottie-react";
+import logoAnimation from "../assets/icons/logo.json";
 
 const Navigation: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -51,10 +53,17 @@ const Navigation: React.FC = () => {
           {/* Logo */}
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="text-2xl font-bold gradient-text cursor-pointer"
+            className="flex items-center cursor-pointer" // Changed for better alignment
             onClick={() => scrollToSection("#about")}
+            style={{ width: 70, height: 70 }} // Responsive logo size
           >
-            Moiz Nafey
+            <Lottie
+              animationData={logoAnimation}
+              loop={true}
+              autoplay
+              style={{ width: 70, height: 70 }} // Square size for logo
+              aria-label="Logo"
+            />
           </motion.div>
 
           {/* Desktop Navigation */}
