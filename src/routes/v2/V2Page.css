@@ -1,0 +1,165 @@
+.v2-page-earth {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+  color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+/* Navigation */
+.v2-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  padding: 1rem 2rem;
+  z-index: 100;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.nav-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: #667eea;
+}
+
+/* Earth Container */
+.earth-container {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+/* Canvas overlay to reduce brightness */
+.canvas-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.1);
+  pointer-events: none;
+  z-index: 5;
+}
+
+.earth-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  text-align: center;
+  pointer-events: none;
+  padding: 2rem;
+}
+
+.earth-title {
+  font-size: 4rem;
+  font-weight: bold;
+  background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+}
+
+.earth-subtitle {
+  font-size: 1.5rem;
+  color: rgba(255, 255, 255, 0.8);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Scroll Text Animation (0-50%) */
+.scroll-text {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  z-index: 15;
+  text-align: center;
+  pointer-events: none;
+  padding: 2rem;
+  max-width: 600px;
+  transition: transform 0.1s ease-out, opacity 0.1s ease-out;
+}
+
+.scroll-text-heading {
+  font-size: 3rem;
+  font-weight: bold;
+  background: linear-gradient(90deg, #f093fb, #f5576c, #ffd700);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 20px rgba(245, 87, 108, 0.3);
+}
+
+.scroll-text-paragraph {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .earth-title {
+    font-size: 2.5rem;
+  }
+
+  .earth-subtitle {
+    font-size: 1.25rem;
+  }
+
+  .nav-links {
+    gap: 1rem;
+  }
+
+  .logo {
+    font-size: 1.2rem;
+  }
+
+  .scroll-text {
+    max-width: 90%;
+    padding: 1rem;
+  }
+
+  .scroll-text-heading {
+    font-size: 2rem;
+  }
+
+  .scroll-text-paragraph {
+    font-size: 1rem;
+  }
+}

@@ -1,10 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "./App.tsx";
+import V2Page from "./routes/v2/V2Page.tsx";
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="/v2" element={<V2Page />} />
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>
 );
