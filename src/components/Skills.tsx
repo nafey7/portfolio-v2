@@ -59,6 +59,7 @@ const Skills: React.FC = () => {
       title: "AI & Machine Learning",
       skills: [
         { name: "CrewAI", level: 85 },
+        { name: "LangGraph", level: 85 },
         { name: "LLMs", level: 80 },
         { name: "Multiagent Systems", level: 82 },
         { name: "RAG", level: 85 },

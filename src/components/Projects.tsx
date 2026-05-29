@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   ExternalLink,
-  Github,
   ChevronLeft,
   ChevronRight,
   X,
@@ -73,13 +72,6 @@ const Projects: React.FC = () => {
     }
   }, [isModalOpen, selectedProject?.title, imagesLoaded]);
 
-  const scrollToContact = () => {
-    const element = document.querySelector("#contact");
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   const openModal = (project: { title: string; images: string[] }) => {
     setSelectedProject(project);
     setIsModalOpen(true);
@@ -107,6 +99,23 @@ const Projects: React.FC = () => {
 
   const projects = [
     {
+      title: "Voya",
+      description:
+        "AI-powered travel planning platform with agentic flight, hotel, and itinerary workflows. Architected FlightLogic GDS/NDC booking flows, LangGraph + Gemini multi-agent orchestration, Google Maps itinerary enrichment, and AWS Terraform infrastructure.",
+      images: [
+        "/images/projectImages/voya_1.png",
+        "/images/projectImages/voya_2.png",
+        "/images/projectImages/voya_3.png",
+        "/images/projectImages/voya_4.png",
+        "/images/projectImages/voya_5.png",
+        "/images/projectImages/voya_6.png",
+        "/images/projectImages/voya_7.png",
+        "/images/projectImages/voya_8.png",
+      ],
+      tech: ["FastAPI", "LangGraph", "Gemini", "React", "AWS"],
+      live: "https://www.myvoya.ai/",
+    },
+    {
       title: "The Leading Practice",
       description:
         "AI-powered marketing automation platform built as a microservices-based multi-tenant SaaS with three-level RBAC authorization using Supabase Auth and row-level security. Architected AI-powered conversation hub with unified messaging across email, SMS, and live chat.",
@@ -117,22 +126,8 @@ const Projects: React.FC = () => {
         "/images/projectImages/tlp_4.png",
       ],
       tech: ["React", "Supabase", "CrewAI", "Pinecone", "Node.js"],
-      github: "#",
       live: "#",
       inDev: true,
-    },
-    {
-      title: "Relevic",
-      description:
-        "A self-service no-code web personalisation tool that provides a complete suite to help create relevant & personalized web experiences. Developed drag-and-drop canvas using React Flow and React DnD with A/B and multivariant testing features.",
-      images: [
-        "/images/projectImages/relevic_1.png",
-        "/images/projectImages/relevic_2.png",
-        "/images/projectImages/relevic_3.png",
-      ],
-      tech: ["React", "Node.js", "MongoDB", "Stripe", "Material UI"],
-      github: "#",
-      live: "https://dashboard.relevic.com/",
     },
     {
       title: "SimplifyVms",
@@ -152,7 +147,6 @@ const Projects: React.FC = () => {
         "/images/projectImages/Simplify_11.png",
       ],
       tech: ["React", "Django", "Flask", "Python", "PostgreSQL"],
-      github: "#",
       live: "https://app.simplifyvms.com/",
     },
   ];
@@ -296,13 +290,6 @@ const Projects: React.FC = () => {
                       )}
                     </div>
                     <div className="flex items-center gap-3">
-                      <button
-                        onClick={scrollToContact}
-                        className="p-2 glass-effect rounded-lg hover:bg-white/20 transition-colors duration-300"
-                        title="Contact me for GitHub access"
-                      >
-                        <Github size={18} />
-                      </button>
                       <a
                         href={project.live}
                         target={project.inDev ? "_self" : "_blank"}

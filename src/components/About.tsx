@@ -94,19 +94,25 @@ const About: React.FC = () => {
             className="space-y-4 xs:space-y-5 sm:space-y-6"
           >
             <div className="flex flex-wrap gap-2 xs:gap-3 sm:gap-4">
-              {["React", "Node.js", "Python", "Supabase", "CrewAI"].map(
-                (tech, index) => (
-                  <motion.span
-                    key={tech}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: index * 0.1 + 0.5 }}
-                    className="px-3 py-1.5 xs:px-4 xs:py-2 glass-effect text-xs xs:text-sm font-medium"
-                  >
-                    {tech}
-                  </motion.span>
-                )
-              )}
+              {[
+                "React",
+                "Node.js",
+                "MongoDB",
+                "CrewAI",
+                "LangGraph",
+                "FastAPI",
+                "Pinecone DB",
+              ].map((tech, index) => (
+                <motion.span
+                  key={tech}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: index * 0.1 + 0.5 }}
+                  className="px-3 py-1.5 xs:px-4 xs:py-2 glass-effect text-xs xs:text-sm font-medium"
+                >
+                  {tech}
+                </motion.span>
+              ))}
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
