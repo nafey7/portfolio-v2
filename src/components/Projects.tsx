@@ -103,14 +103,14 @@ const Projects: React.FC = () => {
       description:
         "AI-powered travel planning platform with agentic flight, hotel, and itinerary workflows. Architected FlightLogic GDS/NDC booking flows, LangGraph + Gemini multi-agent orchestration, Google Maps itinerary enrichment, and AWS Terraform infrastructure.",
       images: [
-        "/images/projectImages/voya_1.png",
-        "/images/projectImages/voya_2.png",
-        "/images/projectImages/voya_3.png",
-        "/images/projectImages/voya_4.png",
-        "/images/projectImages/voya_5.png",
-        "/images/projectImages/voya_6.png",
-        "/images/projectImages/voya_7.png",
-        "/images/projectImages/voya_8.png",
+        "/images/projectImages/optimized/voya_1.jpg",
+        "/images/projectImages/optimized/voya_2.jpg",
+        "/images/projectImages/optimized/voya_3.jpg",
+        "/images/projectImages/optimized/voya_4.jpg",
+        "/images/projectImages/optimized/voya_5.jpg",
+        "/images/projectImages/optimized/voya_6.jpg",
+        "/images/projectImages/optimized/voya_7.jpg",
+        "/images/projectImages/optimized/voya_8.jpg",
       ],
       tech: ["FastAPI", "LangGraph", "Gemini", "React", "AWS"],
       live: "https://www.myvoya.ai/",
@@ -120,10 +120,10 @@ const Projects: React.FC = () => {
       description:
         "AI-powered marketing automation platform built as a microservices-based multi-tenant SaaS with three-level RBAC authorization using Supabase Auth and row-level security. Architected AI-powered conversation hub with unified messaging across email, SMS, and live chat.",
       images: [
-        "/images/projectImages/tlp_1.png",
-        "/images/projectImages/tlp_2.png",
-        "/images/projectImages/tlp_3.png",
-        "/images/projectImages/tlp_4.png",
+        "/images/projectImages/optimized/tlp_1.jpg",
+        "/images/projectImages/optimized/tlp_2.jpg",
+        "/images/projectImages/optimized/tlp_3.jpg",
+        "/images/projectImages/optimized/tlp_4.jpg",
       ],
       tech: ["React", "Supabase", "CrewAI", "Pinecone", "Node.js"],
       live: "#",
@@ -134,17 +134,17 @@ const Projects: React.FC = () => {
       description:
         "Microservices based architecture product for managing contingent workforce, SOW, and talent. Worked on Front End, Backend Integrations, and collaborated directly with major US-based clients including RXO, AMFAM, and Marriott.",
       images: [
-        "/images/projectImages/Simplify_1.png",
-        "/images/projectImages/Simplify_2.png",
-        "/images/projectImages/Simplify_3.png",
-        "/images/projectImages/Simplify_4.png",
-        "/images/projectImages/Simplify_5.png",
-        "/images/projectImages/Simplify_6.png",
-        "/images/projectImages/Simplify_7.png",
-        "/images/projectImages/Simplify_8.png",
-        "/images/projectImages/Simplify_9.png",
-        "/images/projectImages/Simplify_10.png",
-        "/images/projectImages/Simplify_11.png",
+        "/images/projectImages/optimized/Simplify_1.jpg",
+        "/images/projectImages/optimized/Simplify_2.jpg",
+        "/images/projectImages/optimized/Simplify_3.jpg",
+        "/images/projectImages/optimized/Simplify_4.jpg",
+        "/images/projectImages/optimized/Simplify_5.jpg",
+        "/images/projectImages/optimized/Simplify_6.jpg",
+        "/images/projectImages/optimized/Simplify_7.jpg",
+        "/images/projectImages/optimized/Simplify_8.jpg",
+        "/images/projectImages/optimized/Simplify_9.jpg",
+        "/images/projectImages/optimized/Simplify_10.jpg",
+        "/images/projectImages/optimized/Simplify_11.jpg",
       ],
       tech: ["React", "Django", "Flask", "Python", "PostgreSQL"],
       live: "https://app.simplifyvms.com/",
@@ -252,6 +252,9 @@ const Projects: React.FC = () => {
                         (currentImageIndex[project.title] || 0) + 1
                       }`}
                       className="w-full h-full object-cover transition-opacity duration-300 hover:opacity-90"
+                      loading="lazy"
+                      decoding="async"
+                      fetchPriority="low"
                       onError={(e) => {
                         // Fallback to gradient background if image fails to load
                         const target = e.target as HTMLImageElement;
@@ -405,6 +408,9 @@ const Projects: React.FC = () => {
                             index + 1
                           }`}
                           className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+                          loading={index === 0 ? "eager" : "lazy"}
+                          decoding="async"
+                          fetchPriority={index === 0 ? "high" : "low"}
                           onLoad={handleImageLoad}
                           onError={handleImageLoad}
                         />

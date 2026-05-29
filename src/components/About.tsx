@@ -120,7 +120,7 @@ const About: React.FC = () => {
                 onClick={handleDownloadCV}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg font-medium text-sm sm:text-base hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300"
+                className="flex items-center justify-center gap-2 px-6 py-3 bg-emerald-200 text-slate-950 rounded-lg font-medium text-sm sm:text-base hover:shadow-lg hover:shadow-emerald-200/25 transition-all duration-300"
               >
                 <Download size={18} className="xs:w-5 xs:h-5" />
                 Download CV
@@ -135,9 +135,9 @@ const About: React.FC = () => {
                     rel={
                       href.startsWith("mailto:") ? "" : "noopener noreferrer"
                     }
-                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="p-3 glass-effect rounded-lg hover:bg-white/20 transition-colors duration-300"
+                    className="p-3 glass-effect rounded-lg hover:shadow-lg hover:shadow-emerald-200/25 transition-all duration-300"
                     aria-label={label}
                   >
                     <Icon size={20} />

@@ -76,7 +76,7 @@ const Navigation: React.FC = () => {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => scrollToSection(item.href)}
-                className="text-white hover:text-blue-400 transition-colors duration-300 font-medium"
+                className="text-white hover:text-emerald-200 transition-colors duration-300 font-medium"
               >
                 {item.name}
               </motion.button>
@@ -111,7 +111,7 @@ const Navigation: React.FC = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.1 }}
                 onClick={() => scrollToSection(item.href)}
-                className="block w-full text-left text-white hover:text-blue-400 transition-colors duration-300 font-medium py-2"
+                className="block w-full text-left text-white hover:text-emerald-200 transition-colors duration-300 font-medium py-2"
               >
                 {item.name}
               </motion.button>

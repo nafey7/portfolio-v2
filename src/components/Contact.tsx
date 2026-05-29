@@ -93,8 +93,8 @@ const Contact: React.FC = () => {
         darkMode={true}
         style={{ display: "block" }}
         buttonStyle={{
-          background: "linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%)",
-          boxShadow: "0 4px 15px rgba(59, 130, 246, 0.4)",
+          background: "#A7F3D0",
+          boxShadow: "0 4px 18px rgba(167, 243, 208, 0.28)",
         }}
       />
       <section id="contact" className="section-container">
@@ -142,7 +142,7 @@ const Contact: React.FC = () => {
                     whileHover={{ x: 10 }}
                     className="flex items-center gap-4 p-4 glass-effect rounded-lg hover:bg-white/20 transition-all duration-300"
                   >
-                    <div className="p-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg">
+                    <div className="p-2 bg-emerald-200 text-slate-950 rounded-lg">
                       <Icon size={20} />
                     </div>
                     <span className="font-medium">{text}</span>
@@ -209,7 +209,7 @@ const Contact: React.FC = () => {
                     id="user_name"
                     name="user_name"
                     required
-                    className="w-full px-3 py-2 xs:px-4 xs:py-3 bg-white text-black text-sm xs:text-base rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+                    className="w-full px-3 py-2 xs:px-4 xs:py-3 bg-white text-black text-sm xs:text-base rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-200 transition-all duration-300"
                     placeholder="Your name"
                   />
                 </motion.div>
@@ -231,7 +231,7 @@ const Contact: React.FC = () => {
                     id="user_email"
                     name="user_email"
                     required
-                    className="w-full px-3 py-2 xs:px-4 xs:py-3 bg-white text-black text-sm xs:text-base rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+                    className="w-full px-3 py-2 xs:px-4 xs:py-3 bg-white text-black text-sm xs:text-base rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-200 transition-all duration-300"
                     placeholder="your@email.com"
                   />
                 </motion.div>
@@ -253,7 +253,7 @@ const Contact: React.FC = () => {
                     name="message"
                     required
                     rows={6}
-                    className="w-full px-3 py-2 xs:px-4 xs:py-3 bg-white text-black text-sm xs:text-base rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 resize-none"
+                    className="w-full px-3 py-2 xs:px-4 xs:py-3 bg-white text-black text-sm xs:text-base rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-200 transition-all duration-300 resize-none"
                     placeholder="Tell me about your project..."
                   />
                 </motion.div>
@@ -263,9 +263,9 @@ const Contact: React.FC = () => {
                   disabled={status === "sending"}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="w-full flex items-center justify-center gap-2 px-4 py-2.5 xs:px-6 xs:py-3 rounded-lg font-medium text-sm xs:text-base transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed bg-gradient-to-r from-blue-500 to-purple-600 hover:shadow-lg hover:shadow-blue-500/25"
+                  className="w-full flex items-center justify-center gap-2 px-4 py-2.5 xs:px-6 xs:py-3 rounded-lg font-medium text-sm xs:text-base transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed bg-emerald-200 hover:shadow-lg hover:shadow-emerald-200/25"
                   style={{
-                    color: "white",
+                    color: "#020617",
                   }}
                 >
                   {status === "sending" ? (

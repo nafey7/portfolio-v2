@@ -33,10 +33,7 @@
 .logo {
   font-size: 1.5rem;
   font-weight: bold;
-  background: linear-gradient(90deg, #667eea, #764ba2);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #a7f3d0;
 }
 
 .nav-links {
@@ -51,7 +48,7 @@
 }
 
 .nav-links a:hover {
-  color: #667eea;
+  color: #67e8f9;
 }
 
 /* Earth Container */
@@ -87,12 +84,9 @@
 .earth-title {
   font-size: 4rem;
   font-weight: bold;
-  background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #a7f3d0;
   margin-bottom: 1rem;
-  text-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+  text-shadow: 0 0 20px rgba(167, 243, 208, 0.18);
 }
 
 .earth-subtitle {
@@ -117,12 +111,9 @@
 .scroll-text-heading {
   font-size: 3rem;
   font-weight: bold;
-  background: linear-gradient(90deg, #f093fb, #f5576c, #ffd700);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #a7f3d0;
   margin-bottom: 1rem;
-  text-shadow: 0 0 20px rgba(245, 87, 108, 0.3);
+  text-shadow: 0 0 20px rgba(167, 243, 208, 0.18);
 }
 
 .scroll-text-paragraph {
@@ -187,10 +178,7 @@
 .projects-title {
   font-size: 3rem;
   font-weight: bold;
-  background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #a7f3d0;
   margin-bottom: 1rem;
 }
 
@@ -285,10 +273,7 @@
 .skills-title {
   font-size: 3rem;
   font-weight: bold;
-  background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #a7f3d0;
   margin-bottom: 1rem;
 }
 
@@ -315,10 +300,7 @@
 
 /* Gradient text for skill titles */
 .gradient-text {
-  background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #a7f3d0;
 }
 
 /* Responsive for skills */
@@ -514,7 +496,7 @@
 
 .form-input:focus,
 .form-textarea:focus {
-  outline: 2px solid #3b82f6;
+  outline: 2px solid #67e8f9;
   outline-offset: 2px;
 }
 
@@ -536,12 +518,12 @@
   border: none;
   cursor: pointer;
   transition: all 0.3s;
-  background: linear-gradient(to right, #3b82f6, #8b5cf6);
-  color: white;
+  background: #a7f3d0;
+  color: #020617;
 }
 
 .form-submit-btn:hover:not(:disabled) {
-  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+  box-shadow: 0 4px 18px rgba(167, 243, 208, 0.28);
   transform: translateY(-2px);
 }
 
