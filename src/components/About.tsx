@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Download, Github, Linkedin, Mail } from "lucide-react";
 import Lottie from "lottie-react";
 import responsiveDeveloper from "../assets/animations/responsiveDeveloperTwo.json";
-import cvFile from "../assets/files/Moiz_Nafey_Resume.pdf";
+import cvFile from "../assets/files/CV.pdf";
 import { Canvas } from "@react-three/fiber";
 // @ts-ignore - drei exports may not be fully typed
 import { useGLTF, OrbitControls } from "@react-three/drei";
@@ -22,7 +22,7 @@ const About: React.FC = () => {
   const handleDownloadCV = () => {
     const link = document.createElement("a");
     link.href = cvFile;
-    link.download = "Moiz_Nafey_Resume.pdf";
+    link.download = "CV.pdf";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
