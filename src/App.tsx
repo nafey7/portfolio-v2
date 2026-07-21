@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Canvas } from "@react-three/fiber";
 import Navigation from "./components/Navigation.tsx";
 import About from "./components/About.tsx";
@@ -28,6 +29,14 @@ function App() {
           <Certifications />
           <Contact />
         </main>
+        <footer className="w-full py-4 text-center">
+          <Link
+            to="/testing"
+            className="text-[10px] text-white/20 hover:text-white/40 transition-colors"
+          >
+            testing
+          </Link>
+        </footer>
       </div>
     </div>
   );
