@@ -21,15 +21,6 @@ function App() {
 
       {/* Main Content */}
       <div className="relative z-10 w-full max-w-full">
-        {/* Temporary: subtle testing-page link at top for testing purposes */}
-        <div className="w-full py-2 text-center">
-          <Link
-            to="/testing"
-            className="text-[10px] text-white/20 hover:text-white/40 transition-colors"
-          >
-            testing
-          </Link>
-        </div>
         <Navigation />
         <main className="w-full max-w-full">
           <About />

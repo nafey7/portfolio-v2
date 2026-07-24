@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Lottie from "lottie-react";
@@ -48,6 +49,13 @@ const Navigation: React.FC = () => {
           : "bg-transparent py-3 md:bg-transparent md:py-3 max-md:nav-glass-effect max-md:py-2"
       }`}
     >
+      {/* Temporary: subtle testing-page link, centered in nav for testing purposes */}
+      <Link
+        to="/testing"
+        className="absolute top-1 left-1/2 -translate-x-1/2 z-10 text-[10px] text-white/20 hover:text-white/40 transition-colors"
+      >
+        testing
+      </Link>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-2">
         <div className="flex items-center justify-between">
           {/* Logo */}
