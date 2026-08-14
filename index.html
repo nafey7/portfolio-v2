@@ -11,6 +11,39 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <script>
+      // Global scroll-depth score: 0 at the top, then 1 per 10% scrolled (max 10).
+      // Lives on `window` so any script/component on the site can read it.
+      window.relevic_scoring = 0;
+
+      (function () {
+        function updateScore() {
+          var doc = document.documentElement;
+          var scrollable = doc.scrollHeight - window.innerHeight;
+
+          // Page too short to scroll: nothing to score.
+          if (scrollable <= 0) return;
+
+          var percent = (window.scrollY / scrollable) * 100;
+          var score = Math.floor(percent / 10);
+
+          if (score < 0) score = 0;
+          if (score > 10) score = 10;
+
+          if (score !== window.relevic_scoring) {
+            window.relevic_scoring = score;
+            // Lets other code react instead of polling the variable.
+            window.dispatchEvent(
+              new CustomEvent('relevic_scoring_change', { detail: score })
+            );
+          }
+        }
+
+        window.addEventListener('scroll', updateScore, { passive: true });
+        window.addEventListener('resize', updateScore);
+        window.addEventListener('load', updateScore);
+      })();
+    </script>
     <link rel="preconnect" href="https://personalize-staging.relevic.com" />
     <script data-relevic-id="anti-flicker" data-relevic-anti-flicker-background="rgba(255, 255, 255, 1)" src="https://personalize-staging.relevic.com/workspaces/anti-flicker/6a4f8ac4743c8bc72ef00af4.js" type="text/javascript"></script>
     <script data-relevic-script="6a4f8ac4743c8bc72ef00af4" src="https://personalize-staging.relevic.com/workspaces/6a4f8ac4743c8bc72ef00af4.js" type="text/javascript" async></script>
